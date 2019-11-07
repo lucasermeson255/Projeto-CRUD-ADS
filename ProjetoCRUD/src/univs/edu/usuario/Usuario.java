@@ -18,7 +18,6 @@ import javax.persistence.Id;
 public class Usuario {
    @Id
    @GeneratedValue
-    
     private int idUsuario;
    
    @Column(length = 100, nullable = false)
@@ -59,17 +58,17 @@ public class Usuario {
     }
 
     /**
-     * @return the logim
+     * @return the login
      */
-    public String getLogim() {
-        return logim;
+    public String getLogin() {
+        return login;
     }
 
     /**
-     * @param logim the logim to set
+     * @param login the login to set
      */
-    public void setLogim(String logim) {
-        this.logim = logim;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     /**
