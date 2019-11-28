@@ -5,6 +5,7 @@
  */
 package univs.edu.telas;
 
+import javax.swing.JOptionPane;
 import univs.edu.usuario.Usuario;
 import univs.edu.usuario.UsuarioDAO;
 import univs.edu.usuario.UsuarioTableModel;
@@ -61,7 +62,6 @@ public void atualizarTabela(){
         jScrollPane1.setViewportView(TabelaUsuario);
 
         jButton1.setText("Voltar");
-        jButton1.setActionCommand("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -71,7 +71,11 @@ public void atualizarTabela(){
         jButton2.setText("Editar");
 
         jButton3.setText("Excluir");
-        jButton3.setActionCommand("Excluir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,11 +109,30 @@ public void atualizarTabela(){
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        TelaUsuario tela = new TelaUsuario();
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+  
+        int linha = TabelaUsuario.getSelectedRow();
+        if (linha != -1){
+            int id = (int) TabelaUsuario.getValueAt(linha, 0);
+            usuario = dao.pesquisar(id);
+            dao.excluir(usuario);
+            atualizarTabela();
+            JOptionPane.showMessageDialog(null, "Usuário Excluido!");
+        }else{
+            JOptionPane.showConfirmDialog(null, "Selecione uma linha!");
+        }
+  
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
